@@ -1,6 +1,6 @@
 const Footer=({year})=>{
     return(
-        <div>Copy Right {year}</div>
+        <div>Copy Right © {year}</div>
     )
 }
 
