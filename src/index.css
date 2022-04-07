@@ -14,9 +14,18 @@ code {
 .container {
 text-align: center;
 font-weight: bold;
-color: blue;
+color: rgba(251, 251, 253, 0.938);
 background-color: aqua;
 background-image: url("1613494473962-01.jpeg");
 width: 1420px;
 height: 1080px;
+}
+.active{
+  font-weight:bold;
+  color:Black;
+}
+.not-active{
+  font-weight:bold;
+  color:Blue;
+  text-decoration:line-through;
 }

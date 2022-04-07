@@ -4,27 +4,23 @@ import Footer  from "./Components/Footer";
 import Counter from "./Components/Counter";
 import Home from "./Components/Home";
 import Second from "./Components/Second";
+import Layout from "./Components/Layout";
+import Todo from "./Components/Todo";
 
 import {Route, Routes } from "react-router-dom";
 
 
 const App=()=>{
     return(
-        <>
-        <div className="container">
-            <Header title="Todo" color="red"/>  
-    
-            <Body content="MyApp" color="green"/>
             <Routes>
+            <Route path="" element={<Layout/>}>
                 <Route path="" element={<Home/>}/>
                 <Route path="counter" element={<Counter value={0}/>}/>
+                <Route path="todo" element={<Todo/>}/>
                 <Route path="second" element={<Second/>}/>
+                </Route>
             </Routes>
-        
-        
-        <Footer year={2022}/>
-        </div>
-        </>
+
     )
     
 
