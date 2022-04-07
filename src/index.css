@@ -29,3 +29,14 @@ height: 1080px;
   color:Blue;
   text-decoration:line-through;
 }
+.online
+{
+  font-weight:bold;
+  color:rgb(26, 22, 22);
+}
+.offline{
+  font-weight:bold;
+  color:rgb(38, 38, 136);
+  text-decoration:line-through;
+
+}

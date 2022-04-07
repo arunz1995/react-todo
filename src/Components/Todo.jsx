@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import { Link } from "react-router-dom"
 const Todo =() => {
     const[userName,setUserName]=useState('');
     const[todoList,setTodoList]=useState([]);
@@ -62,6 +63,7 @@ const Todo =() => {
                 <button onClick={loadData}>
                     Submit
                 </button>
+                
             </header>
             <main>
                 <div className="add-todo">
@@ -71,12 +73,16 @@ const Todo =() => {
                     onChange={(e)=>setTodo(e.target.value)}
                     />
                     <button onClick={addTodo}>Add</button>
+                    <br />
+                   
+            <Link to="list">List</Link>
                     </div>
                 {todoList.map(todo =>(
                    <div key={todo._id}className={todo.status?"active":"not-active"}
                        onClick={()=>switchActive(todo._id)}
                        >
                    <p>{todo.text}</p> 
+                   
                    </div>
                 ))}
             </main>
