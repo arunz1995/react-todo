@@ -7,6 +7,10 @@ import Second from "./Components/Second";
 import Layout from "./Components/Layout";
 import Todo from "./Components/Todo";
 import List from "./Components/List";
+import Icc from "./Components/Icc";
+import Register from "./Components/Register";
+
+
 
 
 import {Route, Routes } from "react-router-dom";
@@ -19,8 +23,10 @@ const App=()=>{
                 <Route path="" element={<Home/>}/>
                 <Route path="counter" element={<Counter value={0}/>}/>
                 <Route path="todo" element={<Todo/>}/>
+                <Route path="icc" element={<Icc/>}/>
                 <Route path="list" element={<List/>}/>
                 <Route path="second" element={<Second/>}/>
+                <Route path="register" element={<Register/>}/>
                 </Route>
             </Routes>
 

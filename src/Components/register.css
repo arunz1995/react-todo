@@ -1,0 +1,132 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
+html,body,#root{
+    height: 100%;
+}
+.register-container{
+    height: 100%;
+    background-image: url(../Assets/images/background.jpg);
+    background-size: cover;
+    padding: 40px 0 0 40px;
+}
+.register-container main{
+    height: 100%;
+    background-color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 120px;
+    padding: 60px 70px;
+    position: relative;
+}
+.form-section{
+    /*background-color: violet;*/
+    height: 100%;
+    overflow: auto;
+    
+}
+.illustration-section{
+    background-image:url(../Assets/images/register-illustration.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    border-left: solid 3px rgb(208, 208, 208);
+    background-size: 85%;
+    height: 100%;
+}
+.back-button{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 60px;
+    height: 60px;
+    box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.05), 0px 2px 4px rgba(0, 0, 0, 0.1035), inset -1.26965px -1.26965px 1.79556px #F5F5F5, inset 1.26965px 1.26965px 1.79556px #FFFFFF;
+    border-radius: 50%;
+    background-color: rgb(255, 255, 255);
+    background-image: url(../Assets/images/back-arrow.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+.input-field{
+    position: relative;
+}
+.input-field label{
+    position: absolute;
+    left: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgb(235,241,241);
+    padding:0 5px;
+    transition: 0.2s ease-in-out;
+    color: #555;
+    pointer-events: none;
+}
+.input-field input , 
+.input-field textarea , 
+.input-field select
+{
+    width: 100%;
+    padding: 10px 10px 10px 40px;
+    border: none;
+    background-color: rgb(235,241,241);
+    border-radius: 10px;
+}
+.input-field input:focus ~ label,
+.input-field .filled-label,
+.input-field textarea:focus ~label{
+    top: 0;
+    left: 30px;
+    background-color: rgb(255, 255, 255);
+}
+.input-field-icon, .input-field-info-icon{
+    width:20px;
+    height:20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+}
+.textarea-field .input-field-icon, .textarea-field .input-field-info-icon{
+    top: 25px;
+}
+.input-field-info-icon{
+    background-image: url(../Assets/images/info.svg);
+    left:unset;
+    right: 10px;
+    cursor: pointer;
+}
+.error-text{
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+    text-align:right;
+}
+.input-field{
+    padding: 15px 0;
+}
+.textarea-field label{
+    top: 25px;
+}
+.input-field textarea{
+    height: 120px;
+    resize: none;
+}
+.form-section::-webkit-scrollbar{
+    display: none;
+}
+.button-container{
+    text-align: right;
+}
+.button-container button{
+    background-color: #20716A;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    cursor: pointer;
+}
