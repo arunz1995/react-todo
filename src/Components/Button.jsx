@@ -1,9 +1,8 @@
-import React from 'react'
-
+import React from "react"
 const Button = ({Label,type="button"}) => {
   return (
     <div className='button-container'>
-     <Button type={type}>{Label}</Button>  
+     <button type={type}>{Label}</button>  
     </div>
   )
 }

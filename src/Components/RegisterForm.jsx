@@ -6,28 +6,32 @@ import emailIcon from "../Assets/images/email.svg"
 import phoneIcon from "../Assets/images/phone.svg"
 import stateIcon from "../Assets/images/state.svg"
 import cityIcon from "../Assets/images/city.svg"
-import pinIcon from "../Assets/images/pincode.svg"
+import pinIcon from "../Assets/images/postalCode.svg"
 import addressIcon from "../Assets/images/address.svg"
 import SelectField from "./SelectField"
 import Button from "./Button"
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 const RegisterForm = () => {
-    const [formData,setFormData]=useState({
-        orgName:"",
-        employeeName:"",
-        email:"",
-        phone:"",
-        state:"",
-        city:"",
-        postalCode:"",
-        address:"",
-
-    });
+    const formData=useSelector((state)=>state.orgDetails);
+    const dispatch=useDispatch();
+    const formDataError = useSelector((state) => state.orgDetailsError);    
     const [stateList, setStateList] = useState([]);
     const [cityList, setCityList] = useState([]);
-    const {orgName,employeeName,email,phone,state,city,postalCode,address}=formData;
+    const {name,employeeName,email,phone,state,city,postalCode,address}=formData;
     const onChange=(key,value)=>{
-        setFormData({...formData,[key]:value});
+        dispatch({
+          type:"SET_ORG_DETAILS",
+          key,
+          value
+        })
+      }
+    const onChangeError=(key,value)=>{
+      dispatch({
+        type:"SET_ORG_DETAILS_ERROR",
+        key,
+        value
+      })
     }
     useEffect(()=>{
       fetch("http://192.168.1.48:5000/utils/state-list")
@@ -45,10 +49,15 @@ const RegisterForm = () => {
         })
       }
     },[state])
+
     const formSubmit= async(e)=>{
       e.preventDefault();
+      dispatch({
+        type:"RESET_ORG_DETAILS_ERROR",
+      })
+        
       try{
-        const result = await fetch("http://192.168.1.48:5000/register",{
+        const result = await fetch("http://192.168.1.48:5000/organization/register",{
           method:"POST",
           headers:{
             "Content-Type":"application/json"
@@ -56,8 +65,12 @@ const RegisterForm = () => {
           body:JSON.stringify(formData)
         }).then(res => res.json());
         if(!result.status){
-          console.log(result.data);
+          result.data.forEach(({path,message})=>{
+            onChangeError(path,message);
+          })
+          return
         }
+        alert("Successfully Registered");
       }catch(err){
         console.log(err);
       }
@@ -67,34 +80,34 @@ const RegisterForm = () => {
        <InputField Label={"Organization Name"} 
        icon={OrgIcon}
        info="Organization name as per records"
-       error=''
-         value={orgName}
-         onChange={(value)=>onChange("orgName",value)}
+       error={formDataError.orgName}
+         value={name}
+         onChange={(value)=>onChange("name",value)}
          />
             <InputField Label={"Employee Name"}
             icon={empIcon}
             info="Employee name as per records"
-            error=''
+            error={formDataError.employeeName}
             value={employeeName}
             onChange={(value)=>onChange("employeeName",value)}
             />
             <InputField Label={"Email"}
             icon={emailIcon}
             info="Email as per records"
-            error=''
+            error={formDataError.email}
             value={email}
             onChange={(value)=>onChange("email",value)}
             />
             <InputField Label={"Phone Number"}
             icon={phoneIcon}
             info="Phone number as per records"
-            error=''
+            error={formDataError.phone}
             value={phone}
             onChange={(value)=>onChange("phone",value)}
             />
             <SelectField Label={"State"}
             icon={stateIcon}
-            error=''
+            error={formDataError.state}
             options={stateList}
             value={state}
             onChange={(value)=>onChange("state",value)}
@@ -102,14 +115,14 @@ const RegisterForm = () => {
             <SelectField Label={"City"}
             options={cityList}
             icon={cityIcon}
-            error=''
+            error={formDataError.city}  
             value={city}
             onChange={(value)=>onChange("city",value)}
             />
             <InputField Label={"Pin Code"}
             icon={pinIcon}
             info="Postal Code as per records"
-            error=''
+            error={formDataError.postalCode}
             value={postalCode}
             onChange={(value)=>onChange("postalCode",value)}
             />
@@ -118,11 +131,11 @@ const RegisterForm = () => {
              Label={"Address"}
             icon={addressIcon}
             info="Address as per records"
-            error=''
+            error={formDataError.address}
             value={address}
             onChange={(value)=>onChange("address",value)}
             />
-            <Button type="submit" Label="Register"/>
+            <Button type="submit" Label="Register"/> 
 
 
     </form>

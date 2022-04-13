@@ -1,14 +1,20 @@
 import {useState} from 'react'
-import { Link } from "react-router-dom"
+import { useDispatch,useSelector } from 'react-redux';
+
 const Todo =() => {
     const[userName,setUserName]=useState('');
-    const[todoList,setTodoList]=useState([]);
+    // const[todoList,setTodoList]=useState([]);
+    const todoList=useSelector(state=>state.todo);
+    const dispatch=useDispatch();
     const[todo,setTodo]=useState('');
     const loadData =() => {
         fetch(`http://192.168.1.48:8086/todos/${userName}`)
         .then(res=> res.json())
         .then(data =>{
-            setTodoList(data.todos);
+            dispatch({
+                type:'SET_TODO',
+                todo:data.todos
+            })
         }).catch(err =>{
             alert("Invalid user name");
         });
@@ -49,7 +55,10 @@ const Todo =() => {
         body: JSON.stringify(data)
     }).then(res=>res.json())
     .then(data =>{
-        setTodoList(data.todos);
+        dispatch({
+            type:'SET_TODO',
+            todo:data.todos
+        })
     })
    }
     return (
@@ -75,7 +84,7 @@ const Todo =() => {
                     <button onClick={addTodo}>Add</button>
                     <br />
                    
-            <Link to="list">List</Link>
+            
                     </div>
                 {todoList.map(todo =>(
                    <div key={todo._id}className={todo.status?"active":"not-active"}
